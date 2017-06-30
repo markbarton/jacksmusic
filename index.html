@@ -12,9 +12,19 @@
 </head>
 <body>
 <h1>Test</h1>
+<button onclick="joinroom(); return false">Join Room 1</button>
 <script src="http://localhost:8500/socket.io/socket.io.js"></script>
 <script>
   var socket = io('http://localhost:8500');
+  socket.on('connection', function(socket){
+    console.log('connected');
+    socket.on('Test Called', function(msg){
+      console.log('message: ' + msg);
+    });
+  });
+  function joinroom(){
+    socket.join('test_room');
+  }
 </script>
 </body>
 </html>
